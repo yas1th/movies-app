@@ -5,7 +5,7 @@ function Movie({
     handleClick
 }) {
     return (
-        <div key={id} data-title={title} onClick={handleClick}>
+        <div data-title={title} onClick={handleClick} id={id}>
             <img src={poster} alt={title} />
             <p>{title}</p>
         </div>

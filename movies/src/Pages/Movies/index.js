@@ -6,6 +6,7 @@ import createDBInstance from '../../db';
 import { DB_NAME, DB_STORE_NAME, FILM_INDUSTRY_ENUM, NETWORK_DELAY_MS, VERSION } from '../../global.constants';
 
 const dbInstance = createDBInstance(DB_NAME, DB_STORE_NAME, VERSION);
+const selectedMovieIdsMap = {}
 
 function Movies() {
 
@@ -30,9 +31,14 @@ function Movies() {
 
     const handleMovieSelection = (evt) => {
         const curSelMovieTitle = evt.currentTarget.dataset.title;
+        const selMoviedId = evt.currentTarget.id;
         console.log('selected movie is', curSelMovieTitle)
-        setListedOfSelectedMovies(listOfSelectedMovies.concat(curSelMovieTitle))
-        dbInstance.insert('movieTitle', curSelMovieTitle);
+        if(!selectedMovieIdsMap[selMoviedId]) {
+            // Insert the record only if the movie is not yet selected to exclude duplicates
+            selectedMovieIdsMap[selMoviedId] = true;
+            setListedOfSelectedMovies(listOfSelectedMovies.concat(curSelMovieTitle))
+            dbInstance.insert('movieTitle', curSelMovieTitle);
+        }
     }
 
     useEffect(() => {
@@ -59,16 +65,18 @@ function Movies() {
                 <div className='hollywood-movies'>
                     <h3>Hollywood Movies</h3>
                     {listOfHollywoodMovies.length && listOfHollywoodMovies.map((movieInfo) => {
+                        let key = `hmovie-${movieInfo.id}`
                         return (
-                            <Movie {...movieInfo} handleClick={handleMovieSelection} key={`hmovie-${movieInfo.id}`}/>
+                            <Movie {...movieInfo } handleClick={handleMovieSelection} key={key} id={key}/>
                         )
                     })}
                 </div>
                 <div className='bollywood-movies'>
                     <h3>Bollywood Movies</h3>
                     {listOfBollywoodMovies.length && listOfBollywoodMovies.map((movieInfo) => {
+                        let key = `bmovie-${movieInfo.id}`
                         return (
-                            <Movie {...movieInfo} handleClick={handleMovieSelection} key={`bmovie-${movieInfo.id}`}/>
+                            <Movie {...movieInfo } handleClick={handleMovieSelection} key={key} id={key}/>
                         )
                     })}
                 </div>
