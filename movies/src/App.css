@@ -4,3 +4,7 @@
   margin: 4px;
   padding: 12px;
 }
+
+:root {
+  --sel-movies-height: 150px;
+}

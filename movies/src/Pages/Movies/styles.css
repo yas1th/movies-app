@@ -6,7 +6,7 @@
 
 .selected-movies {
     border: 1px solid blue;
-    height: 100px;
+    height: var(--sel-movies-height);
     margin-bottom: 4px;
     padding: 4px;
     overflow-y: scroll;
@@ -17,7 +17,7 @@
     grid-template-columns: repeat(2, 50%);
     grid-gap: 10px;
     border: 1px solid green;
-    height: calc(100vh - 150px);
+    height: calc(100vh - (var(--sel-movies-height) + 50px));
     padding: 4px;
     overflow-y: scroll;
 }
