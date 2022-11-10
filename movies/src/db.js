@@ -49,7 +49,7 @@ var createDBInstance = function(dbName, dbStoreName, version) {
             try{
                 req = dbStore.add(newRecord);
             }catch(ex) {
-                if(ex.name == 'DataCloneError') {
+                if(ex.name === 'DataCloneError') {
                     console.log("This engine doesn't know how to clone a Blob, " +
                              "use Firefox")
                 }else {
