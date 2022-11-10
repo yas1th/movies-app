@@ -1,0 +1,27 @@
+.movies-container {
+    border: 1px solid red;
+    margin: 4px;
+    padding: 8px;
+}
+
+.selected-movies {
+    border: 1px solid blue;
+    height: 100px;
+    margin-bottom: 4px;
+    padding: 4px;
+    overflow-y: scroll;
+}
+
+.movies-list {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-gap: 10px;
+    border: 1px solid green;
+    height: calc(100vh - 150px);
+    padding: 4px;
+    overflow-y: scroll;
+}
+
+.movies-list > div {
+    border-right: 1px solid #999;
+}
